@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+#main-bg {
+    background-color: lightblue;
+    color: white;
+}
+
+.button{
+    background-color: lightblue;
+	transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; 
+    border: 2px solid #000080;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.button:hover{
+    background-color: #000080;
+    color: white;
+}
+
+.center{
+	margin: auto;
+	height: 50%;
+	width: 50%;
+	padding: 20px 10px 20px 10px;
+	text-align: center;
+}
