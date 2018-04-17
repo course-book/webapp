@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Ignore Mac File System meta
+**/.DS_Store
