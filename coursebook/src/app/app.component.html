@@ -1,10 +1,4 @@
-<h1 class="center">Welcome to CourseBook</h1>
-<div class="center">
-	<a routerLink="login"><button type="button" class="button" (click)="showme=true">Login</button></a>
-	<a routerLink="register"><button type="button" class="button" (click)="showme=true">Register</button></a>
-	<div *ngIf="showme">
-		<router-outlet></router-outlet>
-	</div>
-	
+<div>
+	<router-outlet></router-outlet>
 </div>
 

@@ -1,3 +1,13 @@
-<p>
-  register works!
-</p>
+<div>
+	<button routerLink='/'>Back</button>
+	<h2> Register </h2>
+	username: <input #username (keyup)="0" type="username"><br>
+	password: <input #password (keyup)="0" type="password"><br>
+	confirm password: <input #confirmpass (keyup)="0" type="password"><br>
+	<br>
+	<button (click)="onSubmit(username.value,password.value,confirmpass.value)"> Register </button>
+	<p>{{errMsg}}</p>
+	<p>{{mee}}</p>
+	<p>{{bule}}</p>
+	
+</div>
