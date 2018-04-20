@@ -1,3 +1,25 @@
-<button routerLink='/'>Log out</button>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<button class="button" routerLink='/'>Log out</button>
 <br>
-<h1>You are at the home page!</h1>
+<h1 class="center">Welcome to CourseBook!</h1>
+
+<div>
+	<h2>Course</h2>
+	<div id="course_table">
+		<div>
+			<input type="text" placeholder="Search.." id="searchbox" #search (keyup)="0">
+			<button (click)="submitSearch(search.value)"><i class="fa fa-search"></i></button>
+
+			<p>{{searchVal}}</p>
+		</div>
+		<div>
+			<p>Placeholder for coursetable</p>
+		</div>
+	</div>
+</div>
+
+<div>
+	<h2>Others</h2>
+	<button class = "button">Create Course</button>
+	<button class = "button">Wishboard</button>
+</div>

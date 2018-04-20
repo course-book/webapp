@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 
 export class RegisterComponent implements OnInit {
+  mee='';
+  bule='';
   errMsg='';
 
   constructor(private router: Router) { }
@@ -23,7 +25,7 @@ export class RegisterComponent implements OnInit {
   	}else if(!password){
   		this.errMsg = "Password cannot be empty"
   	} else if(password != confirmpass){
-  		this.errMsg = "Confirmed password is not match"
+  		this.errMsg = "Confirmed password does not match"
   	}else{
   		this.errMsg = ""
   		this.mee = "username: "+username;

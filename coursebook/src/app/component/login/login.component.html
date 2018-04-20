@@ -1,10 +1,10 @@
 <div>
-	<button routerLink='/'>Back</button>
-	<h2> Login </h2>
+	<button class="button" routerLink='/'>Back</button>
+	<h1> Login </h1>
 	username: <input #username (keyup)="0" type="username"><br>
 	password: <input #password (keyup)="0" type="password"><br>
 	<br>
-	<button (click)="onSubmit(username.value,password.value)"> Login </button>
+	<button class="button" (click)="onSubmit(username.value,password.value)"> Login </button>
 	<p>{{errMsg}}</p>
 	<p>{{mee}}</p>
 	<p>{{bule}}</p>

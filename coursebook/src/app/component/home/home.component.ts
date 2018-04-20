@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  searchVal="";
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  submitSearch(search:String){
+  	this.searchVal = search;
   }
 
 }

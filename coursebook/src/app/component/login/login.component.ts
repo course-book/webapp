@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   errMsg='';
+  mee='';
+  bule='';
 
   constructor(private router: Router) {}
 
