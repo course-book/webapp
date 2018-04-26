@@ -3,6 +3,7 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { LoginPanelComponent } from './component/login-panel/login-panel.component';
 import { HomeComponent } from './component/home/home.component';
+import { CreateCourseComponent } from './component/create-course/create-course.component';
 
 export const appRoutes: Routes = [
   {	path: '',
@@ -16,5 +17,8 @@ export const appRoutes: Routes = [
   },
   { path: 'register', 
     component: RegisterComponent 
+  },
+  { path: 'create-course',
+    component: CreateCourseComponent
   }
 ];

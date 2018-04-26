@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { UserService } from '../../_services/user.service'
 
 @Component({
   selector: 'app-login',
@@ -8,16 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  errMsg='';
-  mee='';
-  bule='';
+  errMsg='';  
+  model: any={};
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private userService: UserService) {}
 
   ngOnInit() {
   }
 
-  onSubmit(username:String,password:String){
+  login() {
+    this.userService.login(this.model);
+    this.router.navigate(['/home']);
+  }
+
+  onSubmit(username:string,password:string){
   	if(!password && !username){
   		this.errMsg = "Username and password cannot be empty"
   	}else if(!username){
@@ -26,10 +32,12 @@ export class LoginComponent implements OnInit {
   		this.errMsg = "Password cannot be empty"
   	} else{
   		this.errMsg = ""
-  		this.mee = "username: "+username;
-  		this.bule = "password: "+password;
-  		this.router.navigate(['/home']);
+  		this.model.username = username
+      this.model.password = password
+  		this.login();
   	}
   }
+
+
 
 }

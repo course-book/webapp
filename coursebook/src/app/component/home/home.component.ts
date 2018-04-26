@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitSearch(search:String){
+  submitSearch(search:string){
   	this.searchVal = search;
   }
 

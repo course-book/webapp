@@ -1,0 +1,20 @@
+<button class="button" routerLink='/home'>Back</button>
+<h1 class="center">Create Course</h1>
+<div id="course_table">
+	Course Name: <input #name (keyup)="updateName(name.value)" type="text"><br>
+	Description: <input #desc (keyup)="updateDesc(desc.value)" type="text"><br>
+	Short Description: <input #shortdesc (keyup)="updateShortdesc(shortdesc.value)" type="text"><br>
+	
+	Sources: <input #source (keyup.enter)="addSource(source.value)" (blur)="addSource(source.value); source.value=''">
+		<button (click)="addSource(source.value)">Add</button><br>
+	
+	<ul>
+		<li *ngFor="let s of sources">
+			{{ s }} <button (click)=deleteSource(s) type="button">Delete</button>
+		</li>
+	</ul>
+	
+	<button class="button" (click)="onSubmit()">Submit</button><br>
+	<p>{{ errmsg }}</p>
+</div>
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../_services/user.service'
 
 @Component({
   selector: 'app-register',
@@ -8,16 +9,30 @@ import { Router } from '@angular/router';
 })
 
 export class RegisterComponent implements OnInit {
-  mee='';
-  bule='';
   errMsg='';
+  model: any={};
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() {
   }
 
-  onSubmit(username:String, password:String, confirmpass:String){
+  register() {
+    this.userService.create(this.model)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.errMsg= "NotError: "+data;
+          this.router.navigate(['/home']);
+        },
+        error => {
+          console.log(error.message);
+          this.errMsg = error;
+        });
+  }
+
+  onSubmit(username:string, password:string, confirmpass:string){
   	if(!password && !username && !confirmpass){
   		this.errMsg = "Username and password cannot be empty"
   	}else if(!username){
@@ -28,9 +43,10 @@ export class RegisterComponent implements OnInit {
   		this.errMsg = "Confirmed password does not match"
   	}else{
   		this.errMsg = ""
-  		this.mee = "username: "+username;
-  		this.bule = "password: "+password;
-  		this.router.navigate(['/home']);
+      this.model.username = username
+      this.model.password = password
+      this.register()
   	}
   }
+
 }
