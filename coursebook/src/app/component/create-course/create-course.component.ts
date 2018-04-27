@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../_models/user';
 import { Course } from '../../_models/course';
 import { UserService } from '../../_services/user.service';
+import { CourseService } from '../../_services/course.service';
 
 @Component({
   selector: 'app-create-course',
@@ -15,8 +17,10 @@ export class CreateCourseComponent implements OnInit {
   errmsg: string="";
 
   constructor(
-    private userService: UserService) {
-    console.log("author is: "+this.userService.getUser().username) }
+    private router: Router,
+    private userService: UserService,
+    private courseService: CourseService) {
+    console.log("author is: "+this.userService.getToken()) }
 
   ngOnInit() {
   }
@@ -27,13 +31,13 @@ export class CreateCourseComponent implements OnInit {
   }
 
   updateDesc(desc:string){
-  	this.course.desc = desc;
-  	console.log("desc: "+ this.course.desc);
+  	this.course.description = desc;
+  	console.log("desc: "+ this.course.description);
   }
 
   updateShortdesc(shortdesc:string){
-  	this.course.shortdesc = shortdesc;
-  	console.log("shortdesc: "+ this.course.shortdesc);
+  	this.course.shortdescription = shortdesc;
+  	console.log("shortdesc: "+ this.course.shortdescription);
   }
 
   addSource(source:string){
@@ -51,15 +55,27 @@ export class CreateCourseComponent implements OnInit {
     console.log(this.sources);
   }
 
+  createCourse(){
+    this.courseService.create(this.course,this.userService.getToken())
+      .subscribe(
+        data => {
+          this.router.navigate(['/home']);
+        },
+        error => {
+          console.log(error.message);
+          this.errmsg = error;
+        });
+  }
+
   onSubmit(){
   	this.errmsg = "";
-  	if(!this.course.name || this.course.name == ""){
+  	if(this.course.name == ""){
   		this.errmsg += "Course name is required. "
   	}
-  	if(!this.course.desc || this.course.desc == ""){
+  	if(this.course.desc == ""){
   		this.errmsg += "Course Description is required. "
   	}
-  	if(!this.course.shortdesc || this.course.shortdesc == ""){
+  	if(this.course.shortdesc == ""){
   		this.errmsg += "Short Description is required. "
   	}
   	if(this.sources.length==0){
@@ -67,8 +83,9 @@ export class CreateCourseComponent implements OnInit {
   	}
   	if(this.errmsg == ""){
   		this.course.sources = this.sources;
-  		this.course.author = this.userService.getUser();
-  		console.log(this.course.author);
+      this.course.username = this.userService.getUser().username;
+      console.log(this.course.coursename)
+  		this.createCourse()
   	}
   }
 

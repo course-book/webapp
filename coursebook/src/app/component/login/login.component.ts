@@ -19,8 +19,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.userService.login(this.model);
-    this.router.navigate(['/home']);
+    this.userService.login(this.model).subscribe(
+        data => {
+          this.userService.setToken(data);
+          this.router.navigate(['/home']);
+        },
+        error => {
+          console.log(error.message);
+          this.errMsg = error;
+        });
   }
 
   onSubmit(username:string,password:string){

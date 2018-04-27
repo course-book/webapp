@@ -2,8 +2,7 @@ import { User } from './user'
 
 export class Course {
     name: string;
-    desc: string;
-    shortdesc: string;
+    description: string;
+    shortdescription: string;
     sources: string[];
-    author: User;
 }

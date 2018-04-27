@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routerConfig';
 import { UserService } from './_services/user.service'
+import { CourseService } from './_services/course.service'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -27,7 +28,8 @@ import { CreateCourseComponent } from './component/create-course/create-course.c
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    UserService],
+    UserService,
+    CourseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -22,8 +22,7 @@ export class RegisterComponent implements OnInit {
     this.userService.create(this.model)
       .subscribe(
         data => {
-          console.log(data);
-          this.errMsg= "NotError: "+data;
+          this.userService.setToken(data);
           this.router.navigate(['/home']);
         },
         error => {
