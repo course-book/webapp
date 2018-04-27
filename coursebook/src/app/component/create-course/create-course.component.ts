@@ -36,8 +36,8 @@ export class CreateCourseComponent implements OnInit {
   }
 
   updateShortdesc(shortdesc:string){
-  	this.course.shortdescription = shortdesc;
-  	console.log("shortdesc: "+ this.course.shortdescription);
+  	this.course.shortDescription = shortdesc;
+  	console.log("shortdesc: "+ this.course.shortDescription);
   }
 
   addSource(source:string){
@@ -59,11 +59,12 @@ export class CreateCourseComponent implements OnInit {
     this.courseService.create(this.course,this.userService.getToken())
       .subscribe(
         data => {
+          this.errmsg = data;
           this.router.navigate(['/home']);
         },
         error => {
           console.log(error.message);
-          this.errmsg = error;
+          this.errmsg = error.error;
         });
   }
 
