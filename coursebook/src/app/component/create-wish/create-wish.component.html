@@ -1,0 +1,10 @@
+<button class="button" routerLink='/home'>Back</button>
+<h1 class="center">Create Wish</h1>
+<div id="course_table">
+	Wish Name: <input #name (keyup)="updateName(name.value)" type="text"><br>
+	Details: <input #desc (keyup)="updateDesc(desc.value)" type="text"><br>
+	
+	<button class="button" (click)="onSubmit()">Submit</button><br>
+	<p>{{ errmsg }}</p>
+</div>
+
