@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routerConfig';
 import { UserService } from './_services/user.service'
 import { CourseService } from './_services/course.service'
+import { WishService } from './_services/wish.service'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -31,7 +32,8 @@ import { CreateWishComponent } from './component/create-wish/create-wish.compone
   ],
   providers: [
     UserService,
-    CourseService],
+    CourseService,
+    WishService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
