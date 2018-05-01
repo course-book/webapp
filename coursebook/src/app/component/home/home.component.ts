@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WishService } from '../../_services/wish.service';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +10,30 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   searchVal="";
 
-  constructor() { }
+  constructor(
+    private wishService: WishService,
+    private userService: UserService) {
+        this.wishService.get(this.userService.getToken())
+      .subscribe(
+        data => {
+          this.searchVal = data;
+        },
+        error => {
+          console.log(error.message);
+          this.searchVal = error.error;
+        });
+    }
 
   ngOnInit() {
+
   }
 
   submitSearch(search:string){
   	this.searchVal = search;
+  }
+
+  getWish(){
+
   }
 
 }

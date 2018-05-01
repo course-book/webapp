@@ -36,7 +36,7 @@ export class CreateWishComponent implements OnInit {
     this.wishService.create(this.wish,this.userService.getToken())
       .subscribe(
         data => {
-          this.errmsg = data;
+          this.errmsg = "";
           this.router.navigate(['/home']);
         },
         error => {

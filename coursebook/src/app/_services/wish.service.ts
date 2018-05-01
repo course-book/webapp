@@ -13,4 +13,8 @@ export class WishService {
   	return this.http.put('http://localhost:8080/wish',wish,{headers: {'Authorization': token},responseType: 'text'})
   }
 
+  get(token:string){
+  	return this.http.get('http://localhost:8080/wish',{headers: {'Authorization': token},responseType: 'text'})
+  }
+
 }
