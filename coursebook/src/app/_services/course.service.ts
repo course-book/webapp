@@ -11,5 +11,9 @@ export class CourseService {
   create(course:Course,token:string){
   	return this.http.put('http://localhost:8080/course',course,{headers: {'Authorization': token},responseType: 'text'})
   }
+
+  get(){
+  	return this.http.get('http://localhost:8080/course')
+  }
   
 }

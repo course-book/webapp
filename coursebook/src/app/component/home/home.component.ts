@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WishService } from '../../_services/wish.service';
 import { UserService } from '../../_services/user.service';
+import { CourseService } from '../../_services/course.service';
 
 @Component({
   selector: 'app-home',
@@ -8,32 +9,83 @@ import { UserService } from '../../_services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  searchVal="";
+  wishes: Object= [];
+  courses: Object=[];
+  username: string="";
+  errmsg="";
 
   constructor(
     private wishService: WishService,
-    private userService: UserService) {
-        this.wishService.get(this.userService.getToken())
+    private userService: UserService,
+    private courseService: CourseService) {
+
+      this.username = this.userService.getUser().username;
+
+      this.wishService.get()
       .subscribe(
         data => {
-          this.searchVal = data;
+          this.wishes = data;
         },
         error => {
           console.log(error.message);
-          this.searchVal = error.error;
+          this.errmsg = error.error;
         });
-    }
+
+      this.courseService.get()
+      .subscribe(
+        data => {
+          this.courses = data;
+        },
+        error => {
+          console.log(error.message);
+          this.errmsg = error.error;
+        });
+  }
 
   ngOnInit() {
 
   }
+  getWishes(){
+    this.wishService.get()
+      .subscribe(
+        data => {
+          this.wishes = data;
+        },
+        error => {
+          console.log(error.message);
+          this.errmsg = error.error;
+        });
+  }
+
+  getCourses(){
+    this.courseService.get()
+      .subscribe(
+        data => {
+          this.courses = data;
+        },
+        error => {
+          console.log(error.message);
+          this.errmsg = error.error;
+        });
+  }
 
   submitSearch(search:string){
-  	this.searchVal = search;
+  	this.errmsg = search;
   }
 
-  getWish(){
-
+  deleteWish(wishid:string){
+    console.log(wishid)
+    this.wishService.delete(wishid,this.userService.getToken())
+      .subscribe(
+        data => {
+          this.errmsg = data;
+          this.getWishes();
+        },
+        error => {
+          console.log(error.message);
+          this.errmsg = error.error;
+        });
   }
+
 
 }

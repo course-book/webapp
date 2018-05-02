@@ -9,6 +9,8 @@
 	<button class = "button" routerLink='/create-wish'>Create Wish</button>
 </div>
 
+{{ errmsg }}
+
 <div>
 	<h2>Course</h2>
 	<div id="course_table">
@@ -16,10 +18,22 @@
 			<input type="text" placeholder="Search.." id="searchbox" #search (keyup)="0">
 			<button (click)="submitSearch(search.value)"><i class="fa fa-search"></i></button>
 
-			<p>{{searchVal}}</p>
-		</div>
-		<div>
-			<p>Placeholder for coursetable</p>
+			<table style="width:100%">
+			  <tr>
+			    <th id="name">Course Name</th>
+			    <th id="shortdesc">Short Description</th>
+			    <th id="author">Wisher</th>
+			    <th id="delete">Author</th>
+			    <th id="edit">Edit</th>
+			  </tr>
+	  		  <tr *ngFor="let c of courses">
+	      		<td headers="name">{{ c.name }}</td>
+	   			<td headers="shortdesc">{{ c.shortDescription }}</td>
+	  			<td headers="author">{{ c.author }}</td>
+	   			<td headers="delete"><button (click)=deleteCourse(c._id) type="button" [hidden]="username!=c.author">Delete</button></td>
+	   			<td headers="edit"><button (click)=editWish(c._id) type="button" [hidden]="username!=c.author">Edit</button></td>
+	 	  	  </tr>
+			</table>
 		</div>
 	</div>
 </div>
@@ -27,8 +41,21 @@
 <div>
 	<h2>Wishboard</h2>
 	<div id="wish_table">
-		<div>
-			<p>Placeholder for wishtable</p>
-		</div>
+		<table style="width:100%">
+		  <tr>
+		    <th id="name">Wish Name</th>
+		    <th id="details">Details</th>
+		    <th id="wisher">Wisher</th>
+		    <th id="delete">Delete</th>
+		    <th id="edit">Edit</th>
+		  </tr>
+  		  <tr *ngFor="let w of wishes">
+      		<td headers="name">{{ w.name }}</td>
+   			<td headers="details">{{ w.details }}</td>
+  			<td headers="wisher">{{ w.wisher }}</td>
+   			<td headers="delete"><button (click)=deleteWish(w._id) type="button" [hidden]="username!=w.wisher">Delete</button></td>
+   			<td headers="edit"><button (click)=editWish(w._id) type="button" [hidden]="username!=w.wisher">Edit</button></td>
+ 	  	  </tr>
+		</table>
 	</div>
 </div>
