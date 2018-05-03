@@ -14,7 +14,7 @@
 <div>
 	<h2>Course</h2>
 	<div id="course_table">
-		<div>
+		<div style="width:100%">
 			<input type="text" placeholder="Search.." id="searchbox" #search (keyup)="0">
 			<button (click)="submitSearch(search.value)"><i class="fa fa-search"></i></button>
 
@@ -22,16 +22,18 @@
 			  <tr>
 			    <th id="name">Course Name</th>
 			    <th id="shortdesc">Short Description</th>
-			    <th id="author">Wisher</th>
-			    <th id="delete">Author</th>
+			    <th id="author">Author</th>
+			    <th id="view">View</th>
+			    <th id="delete">Delete</th>
 			    <th id="edit">Edit</th>
 			  </tr>
 	  		  <tr *ngFor="let c of courses">
 	      		<td headers="name">{{ c.name }}</td>
 	   			<td headers="shortdesc">{{ c.shortDescription }}</td>
 	  			<td headers="author">{{ c.author }}</td>
-	   			<td headers="delete"><button (click)=deleteCourse(c._id) type="button" [hidden]="username!=c.author">Delete</button></td>
-	   			<td headers="edit"><button (click)=editWish(c._id) type="button" [hidden]="username!=c.author">Edit</button></td>
+	   			<td headers="view"><button (click)=viewCourse(c._id,c) type="button">View</button></td>
+	   			<td headers="delete"><button (click)=deleteCourse(c._id,c) type="button" [hidden]="username!=c.author">Delete</button></td>
+	   			<td headers="edit"><button (click)=editCourse(c) type="button" [hidden]="username!=c.author">Edit</button></td>
 	 	  	  </tr>
 			</table>
 		</div>
@@ -46,6 +48,7 @@
 		    <th id="name">Wish Name</th>
 		    <th id="details">Details</th>
 		    <th id="wisher">Wisher</th>
+		    <th id="complete">Complete</th>
 		    <th id="delete">Delete</th>
 		    <th id="edit">Edit</th>
 		  </tr>
@@ -53,8 +56,9 @@
       		<td headers="name">{{ w.name }}</td>
    			<td headers="details">{{ w.details }}</td>
   			<td headers="wisher">{{ w.wisher }}</td>
-   			<td headers="delete"><button (click)=deleteWish(w._id) type="button" [hidden]="username!=w.wisher">Delete</button></td>
-   			<td headers="edit"><button (click)=editWish(w._id) type="button" [hidden]="username!=w.wisher">Edit</button></td>
+   			<td headers="complete"><button (click)=completeWish(w._id,w) type="button" [hidden]="w.complete==true">Complete</button></td>
+   			<td headers="delete"><button (click)=deleteWish(w._id,w) type="button" [hidden]="username!=w.wisher">Delete</button></td>
+   			<td headers="edit"><button (click)=editWish(w) type="button" [hidden]="username!=w.wisher">Edit</button></td>
  	  	  </tr>
 		</table>
 	</div>

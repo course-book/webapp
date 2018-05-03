@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../_models/user';
+import { Wish } from '../../_models/wish';
 import { Course } from '../../_models/course';
 import { UserService } from '../../_services/user.service';
 import { CourseService } from '../../_services/course.service';
+import { WishService } from '../../_services/wish.service';
 
 @Component({
   selector: 'app-create-course',
@@ -19,8 +21,8 @@ export class CreateCourseComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private courseService: CourseService) {
-    console.log("author is: "+this.userService.getToken()) }
+    private courseService: CourseService,
+    private wishService: WishService) { }
 
   ngOnInit() {
   }
@@ -56,6 +58,7 @@ export class CreateCourseComponent implements OnInit {
   }
 
   createCourse(){
+    console.log(this.course);
     this.courseService.create(this.course,this.userService.getToken())
       .subscribe(
         data => {
@@ -83,10 +86,14 @@ export class CreateCourseComponent implements OnInit {
   		this.errmsg += "At least one source is required. "
   	}
   	if(this.errmsg == ""){
-  		this.course.sources = this.sources;
+      this.course.sources = this.sources;
       this.course.username = this.userService.getUser().username;
-      console.log(this.course.coursename)
-  		this.createCourse()
+      console.log(this.course.name)
+      if(this.wishService.getWish() != null){
+        this.course.wish = this.wishService.getWish()._id;
+        this.wishService.setWish(null);
+      }
+      this.createCourse()
   	}
   }
 

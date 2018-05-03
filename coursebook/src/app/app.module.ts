@@ -14,6 +14,8 @@ import { LoginPanelComponent } from './component/login-panel/login-panel.compone
 import { HomeComponent } from './component/home/home.component';
 import { CreateCourseComponent } from './component/create-course/create-course.component';
 import { CreateWishComponent } from './component/create-wish/create-wish.component';
+import { EditWishComponent } from './component/edit-wish/edit-wish.component';
+import { EditCourseComponent } from './component/edit-course/edit-course.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CreateWishComponent } from './component/create-wish/create-wish.compone
     LoginPanelComponent,
     HomeComponent,
     CreateCourseComponent,
-    CreateWishComponent
+    CreateWishComponent,
+    EditWishComponent,
+    EditCourseComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ import { LoginPanelComponent } from './component/login-panel/login-panel.compone
 import { HomeComponent } from './component/home/home.component';
 import { CreateCourseComponent } from './component/create-course/create-course.component';
 import { CreateWishComponent } from './component/create-wish/create-wish.component';
+import { EditWishComponent } from './component/edit-wish/edit-wish.component';
+import { EditCourseComponent } from './component/edit-course/edit-course.component';
 
 export const appRoutes: Routes = [
   {	path: '',
@@ -24,5 +26,11 @@ export const appRoutes: Routes = [
   },
   { path: 'create-wish',
     component: CreateWishComponent
+  },
+  { path: 'edit-course',
+    component: EditCourseComponent
+  },
+  { path: 'edit-wish',
+    component: EditWishComponent
   }
 ];
