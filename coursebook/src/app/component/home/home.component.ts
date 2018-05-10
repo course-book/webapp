@@ -35,8 +35,12 @@ export class HomeComponent implements OnInit {
         this.wishes = data;
       },
       error => {
-        console.log(error.message);
-        this.errmsg = error.error;
+        console.log(error);
+        if(error.status === 500 || error.status === 0){
+          this.errmsg = "Webserver is down!"
+        }else{
+          this.errmsg = error.error
+        }
       });
 
     this.courseService.get()
@@ -46,8 +50,12 @@ export class HomeComponent implements OnInit {
         console.log(data);
       },
       error => {
-        console.log(error.message);
-        this.errmsg = error.error;
+        console.log(error);
+        if(error.status === 500 || error.status === 0){
+          this.errmsg = "Webserver is down!"
+        }else{
+          this.errmsg = error.error
+        }
       });
   }
 
@@ -62,8 +70,12 @@ export class HomeComponent implements OnInit {
           }
         },
         error => {
-          console.log(error.message);
-          this.errmsg = error.error;
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
   }
 
@@ -79,8 +91,12 @@ export class HomeComponent implements OnInit {
           setTimeout(()=>{ this.ngOnInit()}, 1000);
         },
         error => {
-          console.log(error.message);
-          this.errmsg = error.error;
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
   }
 
@@ -113,8 +129,12 @@ export class HomeComponent implements OnInit {
           console.log(data);
         },
         error => {
-          console.log(error.message);
-          this.errmsg = error.error;
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
     }
   }

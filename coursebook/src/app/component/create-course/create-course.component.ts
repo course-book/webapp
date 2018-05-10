@@ -43,10 +43,12 @@ export class CreateCourseComponent implements OnInit {
   }
 
   addSource(source:string){
-  	if(source){
+  	if(source.trim()){
 	  	this.sources.push(source);
 	  	console.log(this.sources);
-  	}
+  	}else{
+      this.errmsg = "Invalid source input.";
+    }
   }
 
   deleteSource(source:string){
@@ -66,8 +68,12 @@ export class CreateCourseComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error => {
-          console.log(error.message);
-          this.errmsg = error.error;
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
   }
 

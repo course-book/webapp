@@ -9,7 +9,7 @@ import { UserService } from '../../_services/user.service'
 })
 
 export class RegisterComponent implements OnInit {
-  errMsg='';
+  errmsg='';
   model: any={};
 
   constructor(private router: Router,
@@ -26,22 +26,26 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error => {
-          console.log(error.message);
-          this.errMsg = error.error;
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
   }
 
   onSubmit(username:string, password:string, confirmpass:string){
   	if(!password && !username && !confirmpass){
-  		this.errMsg = "Username and password cannot be empty"
+  		this.errmsg = "Username and password cannot be empty"
   	}else if(!username){
-  		this.errMsg = "Username cannot be empty"
+  		this.errmsg = "Username cannot be empty"
   	}else if(!password){
-  		this.errMsg = "Password cannot be empty"
+  		this.errmsg = "Password cannot be empty"
   	} else if(password != confirmpass){
-  		this.errMsg = "Confirmed password does not match"
+  		this.errmsg = "Confirmed password does not match"
   	}else{
-  		this.errMsg = ""
+  		this.errmsg = ""
       this.model.username = username
       this.model.password = password
       this.register()

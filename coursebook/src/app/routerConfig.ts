@@ -7,6 +7,7 @@ import { CreateCourseComponent } from './component/create-course/create-course.c
 import { CreateWishComponent } from './component/create-wish/create-wish.component';
 import { EditWishComponent } from './component/edit-wish/edit-wish.component';
 import { EditCourseComponent } from './component/edit-course/edit-course.component';
+import { CourseViewComponent } from './component/course-view/course-view.component';
 
 export const appRoutes: Routes = [
   {	path: '',
@@ -32,5 +33,8 @@ export const appRoutes: Routes = [
   },
   { path: 'edit-wish',
     component: EditWishComponent
+  },
+  { path: 'course-view',
+    component: CourseViewComponent
   }
 ];

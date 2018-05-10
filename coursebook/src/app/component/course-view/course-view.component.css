@@ -1,0 +1,61 @@
+h2 {
+    margin: 10px;
+}
+
+.button{
+    background-color: lightblue;
+	transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; 
+    border: 2px solid #000080;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.button:hover{
+    background-color: #000080;
+    color: white;
+}
+
+.center{
+	margin: auto;
+	height: 50%;
+	width: 50%;
+	padding: 20px 10px 20px 10px;
+	text-align: center;
+}
+
+#course_table {
+    border: 2px solid #000080;
+    padding: 20px;
+    margin: 20px;
+}
+
+#wish_table {
+    border: 2px solid #000080;
+    padding: 20px;
+    margin: 20px;
+}
+
+#searchbox {
+    border-radius: 5px;
+    font-size:15px;
+    width:90%;
+}
+
+table, th , td  {
+  color: black;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}

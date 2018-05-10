@@ -41,9 +41,13 @@ export class EditWishComponent implements OnInit {
           console.log(data);
           setTimeout(()=>{ this.router.navigate(['/home'])}, 1000);
         },
-        error => {
-          console.log(error.message);
-          this.errmsg = error.error;
+        error => {          
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
 
   }

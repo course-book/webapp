@@ -40,8 +40,12 @@ export class CreateWishComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error => {
-          console.log(error.message);
-          this.errmsg = error.error;
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
   }
 

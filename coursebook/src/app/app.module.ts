@@ -16,6 +16,7 @@ import { CreateCourseComponent } from './component/create-course/create-course.c
 import { CreateWishComponent } from './component/create-wish/create-wish.component';
 import { EditWishComponent } from './component/edit-wish/edit-wish.component';
 import { EditCourseComponent } from './component/edit-course/edit-course.component';
+import { CourseViewComponent } from './component/course-view/course-view.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EditCourseComponent } from './component/edit-course/edit-course.compone
     CreateCourseComponent,
     CreateWishComponent,
     EditWishComponent,
-    EditCourseComponent
+    EditCourseComponent,
+    CourseViewComponent
   ],
   imports: [
     BrowserModule,

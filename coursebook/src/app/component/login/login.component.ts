@@ -8,7 +8,7 @@ import { UserService } from '../../_services/user.service'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  errMsg='';  
+  errmsg='';  
   model: any={};
 
   constructor(
@@ -25,20 +25,24 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error => {
-          console.log(error.message);
-          this.errMsg = error.error;
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
         });
   }
 
   onSubmit(username:string,password:string){
   	if(!password && !username){
-  		this.errMsg = "Username and password cannot be empty"
+  		this.errmsg = "Username and password cannot be empty"
   	}else if(!username){
-  		this.errMsg = "Username cannot be empty"
+  		this.errmsg = "Username cannot be empty"
   	}else if(!password){
-  		this.errMsg = "Password cannot be empty"
+  		this.errmsg = "Password cannot be empty"
   	} else{
-  		this.errMsg = ""
+  		this.errmsg = ""
   		this.model.username = username
       this.model.password = password
   		this.login();
