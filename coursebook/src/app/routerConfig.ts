@@ -8,6 +8,7 @@ import { CreateWishComponent } from './component/create-wish/create-wish.compone
 import { EditWishComponent } from './component/edit-wish/edit-wish.component';
 import { EditCourseComponent } from './component/edit-course/edit-course.component';
 import { CourseViewComponent } from './component/course-view/course-view.component';
+import { StatComponent } from './component/stat/stat.component';
 
 export const appRoutes: Routes = [
   {	path: '',
@@ -36,5 +37,8 @@ export const appRoutes: Routes = [
   },
   { path: 'course-view',
     component: CourseViewComponent
+  },
+  { path: 'stat',
+    component: StatComponent
   }
 ];

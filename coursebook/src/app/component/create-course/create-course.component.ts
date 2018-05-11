@@ -6,6 +6,7 @@ import { Course } from '../../_models/course';
 import { UserService } from '../../_services/user.service';
 import { CourseService } from '../../_services/course.service';
 import { WishService } from '../../_services/wish.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-create-course',
@@ -15,6 +16,7 @@ import { WishService } from '../../_services/wish.service';
 
 export class CreateCourseComponent implements OnInit {
   course: any={};
+  token;
   sources: string[]=[];
   errmsg: string="";
 
@@ -22,7 +24,10 @@ export class CreateCourseComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private courseService: CourseService,
-    private wishService: WishService) { }
+    private wishService: WishService) {
+    this.userService.getToken().subscribe((data)=>{
+      this.token = data
+    }) }
 
   ngOnInit() {
   }
@@ -61,7 +66,7 @@ export class CreateCourseComponent implements OnInit {
 
   createCourse(){
     console.log(this.course);
-    this.courseService.create(this.course,this.userService.getToken())
+    this.courseService.create(this.course,this.token)
       .subscribe(
         data => {
           this.errmsg = data;
@@ -93,7 +98,9 @@ export class CreateCourseComponent implements OnInit {
   	}
   	if(this.errmsg == ""){
       this.course.sources = this.sources;
-      this.course.username = this.userService.getUser().username;
+      this.userService.getUser().subscribe((data)=>{
+        this.course.username = data.username
+      });
       console.log(this.course.name)
       if(this.wishService.getWish() != null){
         this.course.wish = this.wishService.getWish()._id;

@@ -1,3 +1,21 @@
-<p>
-  course-view works!
-</p>
+<button class="button" routerLink='/home'>Back</button>
+<h1 class="center">{{ course.name }}</h1>
+
+<div>
+	<h3>Author: </h3>
+	<p>{{ course.author }}</p>	
+</div>
+<div>
+	<h3>Short Description: </h3>
+	<p>{{ course.shortDescription }}</p>
+</div>
+<div>
+	<h3>Description: </h3>
+	<p>{{ course.description }}</p>
+</div>
+<h3>Sources:</h3>
+<ul>
+	<li *ngFor="let s of course.sources">
+		{{ s }}
+	</li>
+</ul>

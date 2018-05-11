@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { User } from '../_models/user';
 import { Course } from '../_models/course';
 
@@ -9,7 +9,7 @@ import { Course } from '../_models/course';
 export class CourseService {
   current: Course;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,public localStorage: LocalStorage) { }
 
   create(course:Course,token:string){
   	return this.http.put('http://localhost:8080/course',course,{headers: {'Authorization': token},responseType: 'text'})
@@ -26,6 +26,11 @@ export class CourseService {
 
   get(){
   	return <Observable<Course[]>>this.http.get('http://localhost:8080/course')
+  }
+
+  getCourseByID(courseId: string){
+    console.log(courseId)
+    return <Observable<Course>>this.http.get('http://localhost:8080/course/'+courseId)
   }
 
   delete(courseid:string,token:string){

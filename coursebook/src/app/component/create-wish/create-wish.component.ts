@@ -11,12 +11,16 @@ import { WishService } from '../../_services/wish.service';
 })
 export class CreateWishComponent implements OnInit {
   wish: any={};
+  token;
   errmsg: string="";
 
   constructor(
     private router: Router,
     private userService: UserService,
-    private wishService: WishService) { }
+    private wishService: WishService) { 
+    this.userService.getToken().subscribe((data)=>{
+      this.token = data
+    })}
 
   ngOnInit() {
   }
@@ -33,7 +37,7 @@ export class CreateWishComponent implements OnInit {
   }
 
   createWish(){
-    this.wishService.create(this.wish,this.userService.getToken())
+    this.wishService.create(this.wish,this.token)
       .subscribe(
         data => {
           this.errmsg = "";
@@ -58,9 +62,11 @@ export class CreateWishComponent implements OnInit {
   		this.errmsg += "Wish Details is required. "
   	}
   	if(this.errmsg == ""){
-      this.wish.wisher = this.userService.getUser().username;
-      console.log(this.wish.name)
-  	  this.createWish()
+      this.userService.getUser().subscribe((data)=>{
+        this.wish.wisher = data
+        console.log(this.wish.name)
+        this.createWish()
+      });
   	}
   }
 

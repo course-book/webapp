@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   courses: Object[] = [];
   username: string = "";
   errmsg: string = "";
+  token;
 
   constructor(
     private router: Router,
@@ -23,7 +24,12 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private courseService: CourseService) {
 
-      this.username = this.userService.getUser().username;
+      this.userService.getUser().subscribe((data)=> {
+        this.username = data.username
+      });
+      this.userService.getToken().subscribe((data)=>{
+        this.token = data
+      })
 
   }
 
@@ -61,7 +67,7 @@ export class HomeComponent implements OnInit {
 
   deleteWish(wishid:string,wish:Wish){
     console.log(wishid)
-    this.wishService.delete(wishid,this.userService.getToken())
+    this.wishService.delete(wishid,this.token)
       .subscribe(
         data => {
           let index = this.wishes.indexOf(wish);
@@ -81,7 +87,7 @@ export class HomeComponent implements OnInit {
 
   deleteCourse(courseid:string,course:Course){
     console.log(courseid)
-    this.courseService.delete(courseid,this.userService.getToken())
+    this.courseService.delete(courseid,this.token)
       .subscribe(
         data => {
           let index = this.courses.indexOf(course);
@@ -115,8 +121,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/create-course']);
   }
 
-  viewCourse(courseid:string,course:Object){
-
+  viewCourse(courseid:string,course:Course){
+    this.courseService.setCourse(course);
+    this.router.navigate(['/course-view']);
   }
 
   submitSearch(search:string){

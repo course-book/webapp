@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { User } from '../_models/user';
 import { Course } from '../_models/course';
 import { Wish } from '../_models/wish';
@@ -10,7 +10,7 @@ import { Wish } from '../_models/wish';
 export class WishService {
   current: Wish = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,public localStorage: LocalStorage) { }
 
   create(wish:Wish,token:string){
   	return this.http.put('http://localhost:8080/wish',wish,{headers: {'Authorization': token},responseType: 'text'})

@@ -54,8 +54,10 @@ export class EditCourseComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.course); 
-  	this.courseService.edit(this.course["_id"],this.course,this.userService.getToken())
+    var token;
+    this.userService.getToken().subscribe((data)=>{
+      token = data
+      this.courseService.edit(this.course["_id"],this.course,token)
       .subscribe(
         data => {
           console.log(data);
@@ -69,6 +71,8 @@ export class EditCourseComponent implements OnInit {
             this.errmsg = error.error
           }
         });
+    })
+
 
   }
 

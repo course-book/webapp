@@ -6,6 +6,8 @@ import { appRoutes } from './routerConfig';
 import { UserService } from './_services/user.service'
 import { CourseService } from './_services/course.service'
 import { WishService } from './_services/wish.service'
+import { StatService } from './_services/stat.service'
+import { LocalStorageModule } from '@ngx-pwa/local-storage';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -17,6 +19,7 @@ import { CreateWishComponent } from './component/create-wish/create-wish.compone
 import { EditWishComponent } from './component/edit-wish/edit-wish.component';
 import { EditCourseComponent } from './component/edit-course/edit-course.component';
 import { CourseViewComponent } from './component/course-view/course-view.component';
+import { StatComponent } from './component/stat/stat.component';
 
 @NgModule({
   declarations: [
@@ -29,17 +32,20 @@ import { CourseViewComponent } from './component/course-view/course-view.compone
     CreateWishComponent,
     EditWishComponent,
     EditCourseComponent,
-    CourseViewComponent
+    CourseViewComponent,
+    StatComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    LocalStorageModule
   ],
   providers: [
     UserService,
     CourseService,
-    WishService],
+    WishService,
+    StatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

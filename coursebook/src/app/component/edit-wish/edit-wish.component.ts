@@ -35,7 +35,10 @@ export class EditWishComponent implements OnInit {
 
   onSubmit() {
   	console.log(this.wish); 
-  	this.wishService.edit(this.wish["_id"],this.wish,this.userService.getToken())
+    var token;
+    this.userService.getToken().subscribe((data)=>{
+      token = data;
+      this.wishService.edit(this.wish["_id"],this.wish,token)
       .subscribe(
         data => {
           console.log(data);
@@ -49,6 +52,8 @@ export class EditWishComponent implements OnInit {
             this.errmsg = error.error
           }
         });
+    })
+
 
   }
 
