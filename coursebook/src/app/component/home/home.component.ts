@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   courses: Object[] = [];
   username: string = "";
   errmsg: string = "";
+  notification: string = "";
   token;
 
   constructor(
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
       });
       this.userService.getToken().subscribe((data)=>{
         this.token = data
-      })
+      });
 
   }
 
