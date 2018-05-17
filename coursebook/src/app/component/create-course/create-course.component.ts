@@ -52,7 +52,9 @@ export class CreateCourseComponent implements OnInit {
 	  	this.sources.push(source);
 	  	console.log(this.sources);
   	}else{
-      this.errmsg = "Invalid source input.";
+      if(source !== ""){
+        this.errmsg = "Invalid source input.";
+      }
     }
   }
 
@@ -65,15 +67,15 @@ export class CreateCourseComponent implements OnInit {
   }
 
   createCourse(){
-    console.log(this.course);
     this.courseService.create(this.course,this.token)
       .subscribe(
         data => {
+          console.log("data: "+data)
           this.errmsg = data;
           this.router.navigate(['/home']);
         },
         error => {
-          console.log(error);
+          console.log("error: "+error);
           if(error.status === 500 || error.status === 0){
             this.errmsg = "Webserver is down!"
           }else{
@@ -100,13 +102,12 @@ export class CreateCourseComponent implements OnInit {
       this.course.sources = this.sources;
       this.userService.getUser().subscribe((data)=>{
         this.course.username = data.username
+        if(this.wishService.getWish() != null){
+          this.course.wish = this.wishService.getWish()._id;
+          this.wishService.setWish(null);
+        }
+        this.createCourse()
       });
-      console.log(this.course.name)
-      if(this.wishService.getWish() != null){
-        this.course.wish = this.wishService.getWish()._id;
-        this.wishService.setWish(null);
-      }
-      this.createCourse()
   	}
   }
 
