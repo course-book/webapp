@@ -14,6 +14,8 @@ import { Wish } from '../../_models/wish';
 export class HomeComponent implements OnInit {
   wishes: Object[] = [];
   courses: Object[] = [];
+  unnotified: Object[] = [];
+  users: Object[] = [];
   username: string = "";
   errmsg: string = "";
   notification: string = "";
@@ -27,6 +29,22 @@ export class HomeComponent implements OnInit {
 
       this.userService.getUser().subscribe((data)=> {
         this.username = data.username
+        console.log("username: "+this.username)
+        this.wishService.getUnnotify(this.username)
+        .subscribe(
+          data => {
+            this.unnotified = data;
+            console.log(data);
+          },
+          error => {
+            console.log(error);
+                    if(error.status === 500 || error.status === 0){
+              this.errmsg = "Webserver is down!"
+            }else{
+              this.errmsg = error.error
+            }
+          }
+        )
       });
       this.userService.getToken().subscribe((data)=>{
         this.token = data
@@ -54,7 +72,6 @@ export class HomeComponent implements OnInit {
     .subscribe(
       data => {
         this.courses = data;
-        console.log(data);
       },
       error => {
         console.log(error);
@@ -64,6 +81,7 @@ export class HomeComponent implements OnInit {
           this.errmsg = error.error
         }
       });
+
   }
 
   deleteWish(wishid:string,wish:Wish){
@@ -127,13 +145,76 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/course-view']);
   }
 
-  submitSearch(search:string){
+  markNotified(wishid:string, wish:Wish){
+    console.log(wishid);
+    this.wishService.markNotified(wishid,wish,this.token)
+    .subscribe(
+      data => {
+        console.log(data);
+        let index = this.unnotified.indexOf(wish);
+        if(index > -1){
+          this.unnotified.splice(index,1);
+        }
+        setTimeout(()=>{ this.ngOnInit()}, 1000);
+      },
+      error => {
+        console.log(error);
+        if(error.status === 500 || error.status === 0){
+          this.errmsg = "Webserver is down!"
+        }else{
+          this.errmsg = error.error
+        }
+      }
+    );
+  }
+
+  courseSearch(search:string){
     console.log("Search String is: "+search);
     if(search){
       this.courseService.search(search)
       .subscribe(
         data => {
           this.courses = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
+        });
+    }
+  }
+
+  wishSearch(search:string){
+    console.log("Search String is: "+search);
+    if(search){
+      this.wishService.search(search)
+      .subscribe(
+        data => {
+          this.wishes = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+          if(error.status === 500 || error.status === 0){
+            this.errmsg = "Webserver is down!"
+          }else{
+            this.errmsg = error.error
+          }
+        });
+    }
+  }
+
+  userSearch(search:string){
+    console.log("Search String is: "+search);
+    if(search){
+      this.userService.search(search)
+      .subscribe(
+        data => {
+          this.users = data;
           console.log(data);
         },
         error => {

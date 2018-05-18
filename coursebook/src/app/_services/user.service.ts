@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { User } from '../_models/user';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
@@ -17,6 +18,11 @@ export class UserService {
   login(user:User){
     this.localStorage.setItem('user',user).subscribe(()=>{})      
     return this.http.post('http://localhost:8080/login',user,{ responseType: 'text' })
+  }
+
+  search(searchStr: string){
+    console.log(encodeURI(searchStr));
+    return <Observable<User[]>>this.http.get('http://localhost:8080/users?search='+encodeURI(searchStr))
   }
 
   setToken(token:string){

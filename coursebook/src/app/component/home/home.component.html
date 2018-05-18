@@ -16,11 +16,23 @@
 {{ errmsg }}
 
 <div>
+	<h2>Notification</h2>
+	<div id="course_table">
+		<table style="width:100%">
+  		  <tr *ngFor="let w of unnotified">
+      		<td>You wish named "{{ w.name }}" is completed.</td>
+   			<td><button (click)=markNotified(w._id,w) type="button">Mark Notified</button></td>
+ 	  	  </tr>
+		</table>
+	</div>
+</div>
+
+<div>
 	<h2>Course</h2>
 	<div id="course_table">
 		<div style="width:100%">
 			<input type="text" placeholder="Search.." id="searchbox" #search (keyup)="0">
-			<button (click)="submitSearch(search.value)"><i class="fa fa-search"></i></button>
+			<button (click)="courseSearch(search.value)"><i class="fa fa-search"></i></button>
 
 			<table style="width:100%">
 			  <tr>
@@ -47,6 +59,8 @@
 <div>
 	<h2>Wishboard</h2>
 	<div id="wish_table">
+		<input type="text" placeholder="Search.." id="searchbox" #search (keyup)="0">
+		<button (click)="wishSearch(search.value)"><i class="fa fa-search"></i></button>
 		<table style="width:100%">
 		  <tr>
 		    <th id="name">Wish Name</th>
@@ -63,6 +77,22 @@
    			<td headers="complete"><button (click)=completeWish(w._id,w) type="button" [hidden]="w.complete==true">Complete</button></td>
    			<td headers="delete"><button (click)=deleteWish(w._id,w) type="button" [hidden]="username!=w.wisher">Delete</button></td>
    			<td headers="edit"><button (click)=editWish(w) type="button" [hidden]="username!=w.wisher">Edit</button></td>
+ 	  	  </tr>
+		</table>
+	</div>
+</div>
+
+<div>
+	<h2>User Search</h2>
+	<div id="wish_table">
+		<input type="text" placeholder="Search.." id="searchbox" #search (keyup)="0">
+		<button (click)="userSearch(search.value)"><i class="fa fa-search"></i></button>
+		<table style="width:100%">
+		  <tr>
+		    <th id="username">Username</th>
+		  </tr>
+  		  <tr *ngFor="let w of users">
+      		<td headers="name">{{ w.username }}</td>
  	  	  </tr>
 		</table>
 	</div>
