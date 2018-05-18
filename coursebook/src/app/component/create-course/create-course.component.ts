@@ -76,7 +76,9 @@ export class CreateCourseComponent implements OnInit {
         },
         error => {
           console.log("error: "+error);
-          if(error.status === 500 || error.status === 0){
+          if(error.status === 503){
+            this.router.navigate(['/home']);
+          }else if(error.status === 500 || error.status === 0){
             this.errmsg = "Webserver is down!"
           }else{
             this.errmsg = error.error
